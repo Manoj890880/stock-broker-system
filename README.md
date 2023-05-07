@@ -5,10 +5,10 @@ The Stock Broker Application built using the Spring Boot framework is a powerful
 
 The application leverages the robustness and scalability of the Spring Boot framework to ensure the efficient handling of large volumes of transactions. It also implements robust security measures to protect the confidentiality of customer information and ensure the safety of transactions.Whether you're an experienced investor or a novice in the stock market, the Stock Trading Application using Spring Boot provides an intuitive and user-friendly interface that makes investing accessible to everyone. It's a reliable and efficient tool that enables customers to grow their wealth over time.
 
-### ER Diagram.
+# ER Diagram.
 
 ![StockMan (1)](https://user-images.githubusercontent.com/112793753/236673794-e0a3425a-8437-46aa-8edb-5b0e9107d69c.png)
-### Relationships
+# Relationships
 The above ER Diagram has the following relationships : <br/>
 Customers and Wallet: One-to-One relationship, where each customer has only one wallet and each wallet is linked to only one customer.
 
@@ -26,18 +26,18 @@ Loan Against Share and Transactions: One-to-Many relationship, where each mutual
 
 Customers and Mutual Funds: One-to-Many relationship, where each customer can have multiple Mutual Funds, but each Mutual Funds belongs to only one customer.
 
-### Flow Chart
+# Flow Chart
 
 ![marketing tactics to grow your company](https://user-images.githubusercontent.com/112793753/236677792-86dc5d0a-c91e-4f74-8c38-8879040b175b.png)
 
 ![marketing tactics to grow your company (1)](https://user-images.githubusercontent.com/112793753/236677813-1569ac4c-3bfc-430e-b973-d08fb80a9641.png)
 
-## Users:
+# Users:
 
 - Broker
 - Customer
 
-## Roles for the Broker:
+# Roles for the Broker:
 
 1. Broker logs in with their username and password.
 2. Broker can view all customers.
@@ -53,7 +53,7 @@ Customers and Mutual Funds: One-to-Many relationship, where each customer can ha
 ![image](https://user-images.githubusercontent.com/112793753/236678054-523b0d4a-66b6-45d0-907a-b6098534ef19.png)
 ![image](https://user-images.githubusercontent.com/112793753/236678087-0f8714a3-f353-47b7-b921-02f64f9b0974.png)
 
-## Roles of Customers:
+# Roles of Customers:
 
 1. Customer signs up with their first name, last name, username, password, address, mobile number, and email.
 2. Customer logs in with their username and password.
@@ -67,8 +67,8 @@ Customers and Mutual Funds: One-to-Many relationship, where each customer can ha
 ![image](https://user-images.githubusercontent.com/112793753/236678279-db5886a3-2008-41dd-a6e2-314ae01fb4e0.png)
 
 
-### Technologies Used
-#### Spring Boot
+# Technologies Used
+## Spring Boot
 1. Spring Core – Dependency Injection and Inversion of Control
 2. Web MVC architectural pattern
 3. Validation – Validator
@@ -81,7 +81,7 @@ Customers and Mutual Funds: One-to-Many relationship, where each customer can ha
 12. Maven Plugin and dependencies
 13. Session Management using Session Object
 
-#### Hibernate
+## Hibernate
 1. Entity Manager
 2. Relationship Mapping
 3. Hibernate Validator
@@ -103,7 +103,9 @@ Customers and Mutual Funds: One-to-Many relationship, where each customer can ha
 - That's it You are Good to go!!!.
 
 
+## Feedback
 
+If you have any feedback, please reach out to me at manojsahoo890880@gmail.com
 
 
 
