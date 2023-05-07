@@ -8,6 +8,16 @@ The application leverages the robustness and scalability of the Spring Boot fram
 ### ER Diagram.
 
 ![StockMan (1)](https://user-images.githubusercontent.com/112793753/236673794-e0a3425a-8437-46aa-8edb-5b0e9107d69c.png)
+### Relationships
+The above ER Diagram has the following relationships :
+Customers and Wallet: One-to-One relationship, where each customer has only one wallet and each wallet is linked to only one customer.
+Customers and Transactions: One-to-Many relationship, where each customer can have multiple transactions, but each transaction belongs to only one customer.
+Stocks and Transactions: One-to-Many relationship, where each stock can be part of multiple transactions, but each transaction involves only one stock.
+Customers and Stocks: Many-to-Many relationship, where each customer can purchase multiple stocks, and each stock can be purchased by multiple customers. This relationship can be implemented through a junction table that will have foreign keys referencing both the Customers and Stocks tables.
+Mutual Funds and Transactions: One-to-Many relationship, where each mutual fund can be part of multiple transactions, but each transaction involves only one mutual fund.
+Customers and Loan Against Share: One-to-Many relationship, where each customer can have multiple loans against shares, but each loan belongs to only one customer.
+Loan Against Share and Transactions: One-to-Many relationship, where each mutual fund can be part of multiple transactions, but each transaction involves only one Loan Against Share.
+Customers and Mutual Funds: One-to-Many relationship, where each customer can have multiple Mutual Funds, but each Mutual Funds belongs to only one customer.
 
 ### Flow Chart
 
