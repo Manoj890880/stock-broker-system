@@ -28,85 +28,64 @@ import com.stockman.service.TransactionService;
 @RestController
 @RequestMapping("/stockman")
 public class AdminController {
-	@Autowired
-	private AdminService adminService;
-	
-	@Autowired
-	private CustomerService customerService;
-	
-	@Autowired
+    @Autowired
+    private AdminService adminService;
+    @Autowired
+    private CustomerService customerService;
+    @Autowired
     private TransactionService transactionService;
-
-	
-	@PostMapping("/stocks")
-	public ResponseEntity<Stock> saveStock(@RequestBody Stock stock) throws StockException {
-		
-		Stock savedStock= adminService.addStock(stock);
-		
-		
-		return new ResponseEntity<Stock>(savedStock,HttpStatus.CREATED);
-	}
-	
-	@GetMapping("/customers")
-	public ResponseEntity<List<Customer>> getAllCustomers() throws CustomerException {
-		
-		List<Customer> customers= customerService.getAllCustomers();
-		
-		
-		return new ResponseEntity<>(customers,HttpStatus.ACCEPTED);
-	}
-	
-	@GetMapping("/allStocks")
-	public ResponseEntity<List<Stock>> getAllStock() throws StockException {
-		
-		List<Stock> stocks= adminService.getAllStocks();
-		
-		
-		return new ResponseEntity<>(stocks,HttpStatus.ACCEPTED);
-	}
-	
-	@GetMapping("/{name}/report")
-    public ResponseEntity<StockReport> getStockReport(@PathVariable String name)throws ResourceNotFoundException, StockException{
-        Stock stock = adminService.findStockByName(name);
-                
-        
-        Integer stockId = stock.getStockId();
-        
-        Integer sold = transactionService.getTotalSoldQuantityByStockId(stockId);
-                
-        Integer remaining = stock.getTotalQuantity() - sold.intValue();
-
-        return new ResponseEntity<>(new StockReport(stock.getStockName(), stock.getTotalQuantity(), sold, remaining),HttpStatus.ACCEPTED);
+    @PostMapping("/stocks")
+    public ResponseEntity<Stock> saveStock(@RequestBody Stock stock) throws StockException {
+        Stock savedStock = adminService.addStock(stock);
+        return new ResponseEntity<Stock>(savedStock, HttpStatus.CREATED);
     }
-	
-	
-	
-	
-	@DeleteMapping("/customers/{customerId}")
-	public ResponseEntity<Customer> deleteCustomerAccount(@PathVariable Integer customerId) throws CustomerException, ResourceNotFoundException {
-	    Customer customer = customerService.findCustomerById(customerId);
-	    
-	    // Credit the total amount of all stocks to the customer's wallet
-	    
-	    double totalValue = 0.0;
-	    List<Transaction> transactions = transactionService.findByCustomer(customer);
-	    for (Transaction transaction : transactions) {
-	        if (transaction.getTransactionType() == TransactionType.BUY) {
-	            totalValue += transaction.getTransactionPrice();
-	        } else if (transaction.getTransactionType() == TransactionType.SOLD) {
-	            totalValue -= transaction.getTransactionPrice();
-	        }
-	    }
-	    customer.getWallet().setBalance(customer.getWallet().getBalance() + totalValue);
-	    
-	    // Set account inactive
-	    customer.setActive(false);
-	    
-	    Customer customer2=customerService.save(customer);
-	    
-	    return new ResponseEntity<>(customer2,HttpStatus.ACCEPTED);
-	}
-	
+    @GetMapping("/customers")
+    public ResponseEntity<List<Customer>> getAllCustomers() throws CustomerException {
+
+        List<Customer> customers = customerService.getAllCustomers();
+        return new ResponseEntity<>(customers, HttpStatus.ACCEPTED);
+    }
+    @GetMapping("/allStocks")
+    public ResponseEntity<List<Stock>> getAllStock() throws StockException {
+        List<Stock> stocks = adminService.getAllStocks();
+        return new ResponseEntity<>(stocks, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/{name}/report")
+    public ResponseEntity<StockReport> getStockReport(@PathVariable String name) throws ResourceNotFoundException, StockException {
+        Stock stock = adminService.findStockByName(name);
+        Integer stockId = stock.getStockId();
+        Integer sold = transactionService.getTotalSoldQuantityByStockId(stockId);
+        Integer remaining = stock.getTotalQuantity() - sold.intValue();
+        return new ResponseEntity<>(new StockReport(stock.getStockName(), stock.getTotalQuantity(), sold, remaining), HttpStatus.ACCEPTED);
+    }
+
+
+    @DeleteMapping("/customers/{customerId}")
+    public ResponseEntity<Customer> deleteCustomerAccount(@PathVariable Integer customerId) throws CustomerException, ResourceNotFoundException {
+        Customer customer = customerService.findCustomerById(customerId);
+
+        // Credit the total amount of all stocks to the customer's wallet
+
+        double totalValue = 0.0;
+        List<Transaction> transactions = transactionService.findByCustomer(customer);
+        for (Transaction transaction : transactions) {
+            if (transaction.getTransactionType() == TransactionType.BUY) {
+                totalValue += transaction.getTransactionPrice();
+            } else if (transaction.getTransactionType() == TransactionType.SOLD) {
+                totalValue -= transaction.getTransactionPrice();
+            }
+        }
+        customer.getWallet().setBalance(customer.getWallet().getBalance() + totalValue);
+
+        // Set account inactive
+        customer.setActive(false);
+
+        Customer customer2 = customerService.save(customer);
+
+        return new ResponseEntity<>(customer2, HttpStatus.ACCEPTED);
+    }
+
 }
 
 
